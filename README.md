@@ -9,7 +9,7 @@ A react native module to show hud, it works on iOS and Android.
 * 2.`import Hud from 'react-native-lyhud'`
 
 ## GIF
-![image](https://github.com/lxooxl/react-native-lyhud.git/ex.gif)
+![image](https://github.com/lxooxl/react-native-lyhud/blob/master/ex.gif)
 
 ## Getting started
 
