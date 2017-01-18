@@ -17,7 +17,7 @@ Add `react-native-lyhud` to your js file.
 
 `import Hudfrom 'react-native-lyhud'`
 
-Inside your component's render method, use Toast:
+Inside your component's render method, use hud:
 
 ```javascript
  render() {
@@ -48,11 +48,11 @@ render() {
                 <TouchableHighlight
                     style={{padding: 10}}
                     onPress={()=>{
-                        this.refs.toast.show('hello world!');
+                        this.refs.hud.show('hello world!');
                     }}>
                     <Text>Press me</Text>
                 </TouchableHighlight>
-                <Toast ref="toast"/>
+                <Hud ref="hud"/>
             </View>
         );
     }
@@ -66,9 +66,9 @@ Props              | Type     | Optional | Default     | Description
 ----------------- | -------- | -------- | ----------- | -----------
 style  | View.propTypes.style  | true | {backgroundColor: 'black',opacity: OPACITY,borderRadius: 5,padding: 10,}  |   Custom style hud
 positionValue  | React.PropTypes.number  | true | 0  |   Custom hud position marginTop
-fadeInDuration  | React.PropTypes.number  | true | 500  |   Custom toast show duration
-fadeOutDuration  | React.PropTypes.number  | true | 500  |   Custom toast close duration
-opacity  | React.PropTypes.number  | true | 1  |   Custom toast opacity
+fadeInDuration  | React.PropTypes.number  | true | 500  |   Custom hud show duration
+fadeOutDuration  | React.PropTypes.number  | true | 500  |   Custom hud close duration
+opacity  | React.PropTypes.number  | true | 1  |   Custom hud opacity
 textStyle  | View.propTypes.style  | true | {color:'white'}  |   Custom style text
 source  | Image.propTypes.source  | true | null  |  Custom image source
 textOnly  | React.PropTypes.bool  | true | false  |  Only show text
@@ -81,12 +81,3 @@ Method            | Type     | Optional | Description
 ----------------- | -------- | -------- | ----------- | -----------
 show(text)   | function | false | show hud with text
 close() |  function  | -  |  close hud
-
-
-## Contribution
-
-Issues are welcome. Please add a screenshot of bug and code snippet. Quickest way to solve issue is to reproduce it on one of the examples.
-
-Pull requests are welcome. If you want to change API or making something big better to create issue and discuss it first.
-
----
