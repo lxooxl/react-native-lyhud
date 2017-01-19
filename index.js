@@ -43,20 +43,29 @@ export default class Hud extends Component {
 
     }
 
-    close() {
+    close(after = null) {
         if (!this.isShow) return;
-        Animated.timing(
-            this.state.opacityValue,
-            {
-                toValue: 0.0,
-                duration: this.props.fadeOutDuration,
-            }
-        ).start(() => {
-            this.setState({
-                isShow: false,
-            });
-            this.isShow = false;
-        })
+        let animate = () => {
+            Animated.timing(
+                this.state.opacityValue,
+                {
+                    toValue: 0.0,
+                    duration: this.props.fadeOutDuration,
+                }
+            ).start(() => {
+                this.setState({
+                    isShow: false,
+                });
+                this.isShow = false;
+            })
+        }
+
+        if (after != null) {
+            setTimeout(animate,after);
+        } else {
+            animate();
+        }
+
     }
 
     render() {
