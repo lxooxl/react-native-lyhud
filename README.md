@@ -15,7 +15,7 @@ This is base on [react-native-easy-toast](https://github.com/crazycodeboy/react-
 
 Add `react-native-lyhud` to your js file.
 
-`import Hudfrom 'react-native-lyhud'`
+`import Hud from 'react-native-lyhud'`
 
 Inside your component's render method, use hud:
 
