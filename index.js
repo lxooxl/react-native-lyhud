@@ -25,7 +25,7 @@ export default class Hud extends Component {
         };
     }
 
-    show(text, hudType) {
+    show(text) {
         this.setState({
             isShow: true,
             text: text,
@@ -40,7 +40,6 @@ export default class Hud extends Component {
         ).start(() => {
             this.isShow = true;
         });
-
     }
 
     close(after = null) {
@@ -58,7 +57,7 @@ export default class Hud extends Component {
                 });
                 this.isShow = false;
             })
-        }
+        };
 
         if (after != null) {
             setTimeout(animate,after);
@@ -90,12 +89,12 @@ export default class Hud extends Component {
         }
 
         let view = this.state.isShow ?
-            <View ref="container" pointerEvents= {this.props.backgroundTouchable ? 'none':'auto'} style={[styles.container, {top: this.props.positionValue}]}>
+            <View ref="container" pointerEvents= {this.props.backgroundTouchable ? 'none':'auto'} style={[styles.container, {paddingTop: this.props.positionValue}]}>
                 <Animated.View
                     style={[styles.content, { opacity: this.state.opacityValue }, this.props.style]}
                 >
                     {hud}
-                    <Text style={this.props.textStyle}>{this.state.text}</Text>
+                    <Text numberOfLines={20} style={this.props.textStyle}>{this.state.text}</Text>
                 </Animated.View>
             </View> : null;
         return view;
@@ -111,6 +110,8 @@ const styles = StyleSheet.create({
         bottom:0,
         alignItems: 'center',
         justifyContent:'center',
+        padding:48,
+
     },
     text: {
         color: 'white',
@@ -155,7 +156,7 @@ Hud.defaultProps = {
     backgroundTouchable:true,
     imageStyle:{
         tintColor:'white'
-    }
+    },
 };
 
 
