@@ -2,7 +2,7 @@
 A react native module to show hud, it works on iOS and Android.
 
 
-
+This is base on [react-native-easy-toast](https://github.com/crazycodeboy/react-native-easy-toast)<br />
 ## Installation
 
 * 1.Run `npm i react-native-lyhud --save`
