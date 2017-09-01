@@ -34,6 +34,12 @@ export default class Examples extends Component {
         };
     }
 
+    // componentDidUpdate() {
+    //     console.log('update');
+    //     this.hud.show('custom hud');
+    //     this.hud.close(2000);
+    // }
+
     render() {
         return (
             <View style={styles.container}>
@@ -43,6 +49,7 @@ export default class Examples extends Component {
                             hudType:'info'
                         });
                         this.hud.show('info hud')
+                        this.hud.close(2000);
                     }}
                     style={styles.text}
                 >
@@ -53,7 +60,8 @@ export default class Examples extends Component {
                         this.setState({
                             hudType:'success'
                         });
-                        this.hud.show('success hud')
+                        this.hud.show('success hud');
+                        this.hud.close(2000);
                     }}
                     style={styles.text}>
                     success hud
@@ -64,6 +72,7 @@ export default class Examples extends Component {
                             hudType:'error'
                         });
                         this.hud.show('error hud')
+                        this.hud.close(2000);
                     }}
                     style={styles.text}>
                     error hud
@@ -75,6 +84,7 @@ export default class Examples extends Component {
                             source:null,
                         });
                         this.hud.show('default hud')
+                        this.hud.close(2000);
                     }}
                     style={styles.text}>
                     default hud
@@ -84,7 +94,8 @@ export default class Examples extends Component {
                         this.setState({
                             source:require('./angle-mask.png')
                         });
-                        this.hud.show('custom hud')
+                        this.hud.show('custom hud');
+                        this.hud.close(2000);
                     }}
                     style={styles.text}>
                     custom hud
@@ -95,7 +106,8 @@ export default class Examples extends Component {
                         this.setState({
                             textOnly:!this.state.textOnly,
                         });
-                        this.hud.show('text only')
+                        this.hud.show('text only');
+                        this.hud.close(2000);
                     }}
                 >
                     text only switch

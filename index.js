@@ -1,7 +1,7 @@
 /**
  * Created by liuyu on 2017/1/18.
  */
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {
     View,
     Text,
@@ -9,11 +9,10 @@ import {
     ActivityIndicator,
     Animated,
     StyleSheet,
-    Platform
 } from 'react-native';
-const NavBarHeight = Platform.OS == 'android' ? 96 * Util.size.width / Util.size.height:64;
 
-export default class Hud extends Component {
+export default class Hud extends PureComponent {
+    mount = false;
     // 构造
     constructor(props) {
         super(props);
@@ -25,21 +24,30 @@ export default class Hud extends Component {
         };
     }
 
-    show(text) {
+    componentDidMount() {
+        this.mount = true;
+    }
+
+    componentWillUnmount() {
+        this.mount = false;
+    }
+
+    show(text = '', after = null) {
         this.setState({
             isShow: true,
             text: text,
         });
-
+        this.isShow = true;
         Animated.timing(
             this.state.opacityValue,
             {
                 toValue: this.props.opacity,
                 duration: this.props.fadeInDuration,
             }
-        ).start(() => {
-            this.isShow = true;
-        });
+        ).start();
+        if (after !== null) {
+            this.close(after)
+        }
     }
 
     close(after = null) {
@@ -52,7 +60,7 @@ export default class Hud extends Component {
                     duration: this.props.fadeOutDuration,
                 }
             ).start(() => {
-                this.setState({
+                this.mount && this.setState({
                     isShow: false,
                 });
                 this.isShow = false;
@@ -82,11 +90,13 @@ export default class Hud extends Component {
                     break;
                 default:
                     hud = this.props.source == null ?
-                        <ActivityIndicator style={styles.image} animating={this.state.isShow} size={'small'}/> :
+                        <ActivityIndicator style={styles.image} animating={this.state.isShow} size={'large'}/> :
                         <Image style={this.props.imageStyle} source={this.props.source}/>;
                     break;
             }
         }
+
+
 
         let view = this.state.isShow ?
             <View ref="container" pointerEvents= {this.props.backgroundTouchable ? 'none':'auto'} style={[styles.container, {paddingTop: this.props.positionValue}]}>
@@ -94,7 +104,7 @@ export default class Hud extends Component {
                     style={[styles.content, { opacity: this.state.opacityValue }, this.props.style]}
                 >
                     {hud}
-                    <Text numberOfLines={20} style={this.props.textStyle}>{this.state.text}</Text>
+                    {this.state.text != '' ?<Text numberOfLines={20} style={this.props.textStyle}>{this.state.text}</Text> : null}
                 </Animated.View>
             </View> : null;
         return view;
@@ -106,7 +116,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         right: 0,
-        top:NavBarHeight,
+        top:0,
         bottom:0,
         alignItems: 'center',
         justifyContent:'center',
@@ -119,12 +129,12 @@ const styles = StyleSheet.create({
     content: {
         backgroundColor: 'black',
         borderRadius: 5,
-        padding: 10,
+        padding: 16,
         flexDirection: 'column',
         alignItems:'center'
     },
     image: {
-        marginBottom:8,
+        marginBottom:0,
     }
 });
 
@@ -141,6 +151,7 @@ Hud.propTypes = {
         'info',
         'success',
         'error',
+        'none',
     ]),
     imageStyle:Image.propTypes.style,
     backgroundTouchable:React.PropTypes.bool,
@@ -157,6 +168,7 @@ Hud.defaultProps = {
     imageStyle:{
         tintColor:'white'
     },
+    hudType:'none'
 };
 
 
